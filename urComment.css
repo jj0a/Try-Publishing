@@ -1,0 +1,102 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Raleway",sans-serif;
+}
+/* Popup container styles */
+.popup-urComment {
+    position: relative; /* Relative, not fixed */
+    width: 90%; /* Make it responsive */
+    max-width: 600px; /* Limit the width */
+    margin: 50px auto; /* Center horizontally with margin */
+    padding: 20px 30px;
+    background: #fff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    border: 1px solid rgb(48, 47, 47);
+    height: auto; /* Auto height to fit the content */
+    overflow-y: auto; /* Allow the content to scroll if needed */
+}
+
+/* Close button styles */
+.popup-urComment .close-comment-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px; /* Increase size for better visibility */
+    height: 30px;
+    background: #888; /* Background color */
+    color: #fff; /* Text color */
+    text-align: center;
+    line-height: 30px; /* Center text vertically */
+    border-radius: 50%; /* Circular button */
+    cursor: pointer;
+    font-size: 20px; /* Font size for the × */
+}
+
+/* Heading styles */
+.popup-urComment h1 {
+    text-align: center;
+    color: #222; /* Text color */
+    margin: 10px 0; /* Margin for spacing */
+    font-size: 40px; /* Font size for the heading */
+}
+
+.popup-urComment h2 {
+    text-align: center;
+    color: #222; /* Text color */
+    margin: 10px 0; /* Margin for spacing */
+    font-size: 35px; /* Font size for the subheading */
+}
+
+/* Box content styles */
+.popup-urComment .box-content {
+    margin-top: 20px; /* Margin from the top */
+    padding: 10px; /* Padding inside the box */
+    border: 1px solid #aaa; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    background: #f9f9f9; /* Background color */
+}
+
+
+.popup-urComment .comment-box strong {
+    font-size: 20px; /* Author name styling */
+    color: #333; /* Darker text color for the author name */
+}
+
+.popup-urComment .comment-box p {
+    text-align: left;
+    font-size: 15px; /* Message styling */
+    color: #555; /* Lighter text color for the message */
+    margin: 5px 0 20px; /* Add some margin between the author and message */
+}
+.popup-urComment .load-more {
+    margin-top: 15px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: #f4347f; /* Button background color */
+    color: #f5f5f5;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.popup-urComment .load-more:hover {
+    background-color: #c12e6c; /* Darker color on hover */
+}
+
+.notify{
+    justify-content: center;
+    color: red;
+}
+
+.form-element-urComment a{
+    margin-top: 15px;
+    color: #615b5b;
+    font-size: 12px;
+}

@@ -1,0 +1,1100 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-padding-top: 4rem;
+    scroll-behavior: smooth;
+    list-style: none;
+    text-decoration: none;
+}
+/* Variables */
+:root{
+    --main-color: #f4347f;
+    --second-color: #edeae3;
+    --text-color: #1b1b1b;
+    --bg-color: #fff;
+
+    /* Box Shadow */
+    --box-shadow:2px 2px 10px 4px rgb(14 55 54 / 15%);
+}
+section{
+    padding: 50px 100px;
+}
+ 
+img{
+    width: 100%;
+}
+
+
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    transition: 0.5s linear;
+    background: var(--main-color);
+}
+
+header h3 {
+    color: var(--second-color);
+}
+
+
+
+/*Navbar design starts here*/
+.navbar {
+    display: none; /* Initially hidden */
+    position: fixed;
+    right: 0;
+    top: 60px;
+    height: 100%;
+    width: 250px; /* Adjust width as needed */
+    background-color: var(--main-color);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 20px; /* To account for the header height */
+    z-index: 999; /* Ensure it appears above other elements */
+    gap: 4.5rem;
+    transition: transform 0.3s ease;
+}
+
+.navbar a {
+    padding: 15px;
+    color: var(--bg-color);
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 550;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--bg-color);
+    transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+    background: var(--bg-color);
+    border-radius: 0.5rem;
+    color: var(--text-color);
+}
+
+
+.hamburger {
+    display: block; /* Ensure the hamburger is visible */
+    cursor: pointer;
+}
+
+.bar {
+    height: 2px;
+    width: 27px;
+    background: #fff;
+    margin: 5px 0;
+    opacity: 0.8;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav--open {
+    display: flex; /* Show the navbar when nav--open class is added */
+}
+
+/*hamburger open is responsible for X */
+.hamburger--open .bar:nth-child(1) {            /*Slant the first hamburger*/
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger--open .bar:nth-child(2) {            /*Hide the second hamburger*/
+    opacity: 0;
+}
+
+.hamburger--open .bar:nth-child(3) {           /*Slant the first hamburger*/
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/*Popup login design starts here*/
+.popup {
+    display: none; /* Hide the popup by default */
+    position: fixed; /* Use fixed positioning to allow it to move with the user's scroll */
+    opacity: 0;
+    top: 50%; /* Default position in the middle of the viewport */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%) scale(1.25); /* Center and scale */
+    width: 450px;
+    height: 600px;
+    padding: 20px 30px;
+    background: #fff;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.popup.active{
+    display: block;
+    top: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); /* Scale back to normal size */
+    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+}
+.popup .close-btn{
+     position: absolute;
+     top: 10px;
+     right:10px;
+     width: 15px;
+     height: 15px;
+     background: #888;
+     text-align: center;
+     line-height: 15px;
+     border-radius: 15px;
+     cursor: pointer;
+}
+
+.popup .form h2{
+    text-align: center;
+    color: #222;
+    margin: 10px 0px 2px;
+    font-size: 25px;
+}
+
+.popup .form h1{
+    text-align: center;
+    color: #222;
+    margin: 5px 0px 3px;
+    font-size: 70px;
+}
+.popup .form p{
+    text-align: center;
+    color: #222;
+    margin: 3px 0px 20px;
+    font-size: 15px;
+}
+.popup .form .form-element{
+    margin: 15px 0px;
+}
+.popup .form .form-element label{
+    font-size: 14px;
+    color: #222;
+}
+
+.popup .form .form-element input[type = "text"],
+.popup .form .form-element input[type = "email"],
+.popup .form .form-element input[type = "password"]{
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid  #aaa;
+}
+
+.popup .form .form-element input[type = "checkbox"]{
+    margin-right: 5px;
+}
+.popup .form .form-element button{
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: var(--main-color);
+    color: #f5f5f5;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+small {
+    color: #666; /* Color for the text */
+    font-size: 12px; /* Adjust font size as needed */
+    display: block;
+    text-align: center;
+}
+
+.popup .form .form-element a{
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: #1a79ca;
+    text-decoration: none;
+}
+
+/*Popup comment design starts here*/
+.popup-comment {
+    position: fixed; /* Fixes the popup on the screen */
+    top: 50%; /* Vertically centers the popup */
+    left: 50%; /* Horizontally centers the popup */
+    transform: translate(-50%, -50%); /* Moves the popup into the exact center */
+    width: 400px;
+    height: 500px;
+    padding: 20px 30px;
+    background: #fff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    opacity: 0; /* Hidden by default */
+    visibility: hidden; /* Hidden by default */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+.popup-comment.active {
+    opacity: 1; /* Make it visible */
+    visibility: visible; /* Make it visible */
+}
+
+.popup-comment .close-button{
+     position: absolute;
+     top: 10px;
+     right:10px;
+     width: 15px;
+     height: 15px;
+     background: #888;;
+     text-align: center;
+     line-height: 15px;
+     border-radius: 15px;
+     cursor: pointer;
+}
+
+.popup-comment .form-comment h2{
+    text-align: center;
+    color: #222;
+    margin: 5px 0px 3px;
+    font-size: 30px;
+}
+
+.top {
+    text-align: center; /* Center the text */
+    color: #222; /* Set your desired color */
+    margin: 5px 0px 10px; /* Adjust margins */
+    font-size: 28px; /* Adjust font size */
+}
+
+
+.popup-comment .form-comment .form-element-comment{
+    margin: 15px 0px;
+}
+.popup-comment .form-element-comment label{
+    font-size: 14px;
+    color: #222;
+}
+
+.popup-comment .form-comment .form-element-comment input[type = "text"]{
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid  #aaa;
+}
+
+.popup-comment .form-comment .form-element-comment textarea{
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid  #aaa;
+}
+
+.popup-comment .form-comment .form-element-comment button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: var(--main-color);
+    color: #f5f5f5;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition for smooth hover */
+}
+
+.popup-comment .form-comment .form-element-comment button:hover {
+    background-color:  #d63a76; /* Change to second color on hover */
+}
+
+.popup-comment .form-comment .form-element-comment a{
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: #1a79ca;
+    text-decoration: none;
+}
+
+/*Home design starts here*/
+.home{
+    width: 100%;
+    min-height: 100vh;
+    background: url(images/stationary.jpg);/*This is for the background*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, auto));
+    align-items: center;
+    gap: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+.home-text{
+    text-align: center;
+    font-weight: 500;
+}
+.home-text h1{
+    font-size: 4rem;
+    color: var(--bg-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: cursive;
+}
+.home-text p{
+    font-size: 0.938rem;
+    color: black;
+    margin: 0.5rem 0 1.4rem;
+    max-width: 850px; 
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/*Members design starts here*/
+.heading{
+    text-align: center;
+}
+.heading h2{
+    font-size: 2rem;
+    font-family: "Lucida Handwriting", cursive;
+    align-items: center;
+}
+
+.members .members-container {
+    display: flex; /* Use flexbox for horizontal layout */
+    flex-wrap: wrap; /* Allow wrapping to keep items in one line */
+    gap: 1rem; /* Space between boxes */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    margin-top: 2rem;
+}
+
+.members .box {
+    width: 200px; /* Set a fixed width for each box */
+    height: auto; /* Allow height to adjust based on content */
+    padding: 10px;
+    padding-bottom: 10px; /* Extra padding at the bottom */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    box-shadow: var(--box-shadow);
+    overflow: hidden; /* Ensure no content overflows */
+    border: 2px solid black;
+    background-color: #fdc2d6;
+}
+.members .box img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    max-height: 300px; /* Limit height to fit within the box */
+    object-fit: cover; /* Cover the box area, cropping if necessary */
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease-in-out;
+}
+.members .box:hover img {
+    transform: scale(1.05); /* Optional: Add a hover effect */
+}
+
+.members .box:hover{
+    background-color: #e794a6;
+    color: white;
+
+}
+.members .box h3 {
+    font-size: 0.9rem;
+    font-weight: bold;
+    font-family: cursive;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 1rem 0 0;
+}
+
+.members button {
+    border: none;
+    background-color: #fc72a6;
+    box-shadow: var(--box-shadow);
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 0.5rem;
+  }
+
+.members button:hover{
+    background-color: #e794a6;
+}
+/*Members design ends here*/
+
+/*Profile design starts here*/
+.heading h2 {
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+.box h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.profile {
+    display: none;
+}
+
+.profile--visible{  /*To show again the profile*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.profile-item {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fdd9e5;
+    width: 250px; /* Adjust the width as needed */
+}
+
+.profile-image img {
+    width: 120px;
+    height: 120px;
+    margin-top: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info {
+    margin-top: 15px;
+}
+
+.profile-container .box {
+    margin-top: 20px;
+    padding: 5px; /* Increased padding to ensure content doesn't touch the edges */
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #fdc2d6;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.profile-container .box:hover {
+    transform: scale(1.05); /* Slightly enlarges the box */
+    background-color: #fc72a6; /* Changes background color on hover */
+}
+
+.favorites-images {
+    display: flex;
+    gap: 10px;
+    overflow: hidden;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.favorites-images img {
+    width: 65px;  /* Adjust size as needed */
+    height:65px;  /* Ensure the images are square */
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease; /* Add a hover effect to the images */
+}
+
+.favorites-images img:hover {
+    transform: scale(1.1); /* Slightly enlarges the image on hover */
+}
+
+.hidden {
+    display: none;
+}
+
+
+/*Others design starts here*/
+.others{
+    display: none;
+}
+
+.others--visible{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.others .others-container { /*This group selector represents that the style is only applied to .others-container elements that are inside .others section*/
+    margin-top: 1rem;
+    background-color: #fdc2d6;
+    padding: 30px;
+    border-radius: 1rem;
+    border: 2px dashed black;
+}
+
+
+.others-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.others-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.others-info {
+    margin-top: 2rem; 
+}
+
+.others-info h2 {
+    font-size: 30px;
+    margin-bottom: 10px;  /* Decreased margin below <h2> */
+    font-family: cursive;
+}
+
+.others-info p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 5px;  /* Controls the space above the paragraph */
+    
+}
+
+
+/*social links design starts here*/
+.container-details {
+
+    display: none;
+    
+}
+
+.container-details--open{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+    background: url(images/j-lee-DHIVyfAPFqQ-unsplash.jpg);
+    margin-bottom: 1rem;
+}
+
+.info-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px; /* To give space below the image and name */
+}
+
+.info-image img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px; /* To add space between image and info */
+}
+
+.info {
+    text-align: center; /* Center text inside the info div */
+  
+}
+
+.social-links {
+    display: flex;
+    justify-content: center; /* Center the social icons horizontally */
+    margin: 10px 0;
+}
+
+.social-links a {
+    margin: 0 10px;
+    color: black;
+    font-size: 30px;
+}
+
+.knowledge {
+    width: 100%;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    text-transform: uppercase;
+   
+}
+
+.percent {
+    flex: 1;
+}
+
+.bar-per{
+    display: flex;
+    height: 25px;
+    background: linear-gradient(135deg, rgba(236, 0, 140, 1)0%, rgba(252, 103, 103, 1)100%);
+    border-radius: 5px;
+    margin-left: 10px;
+    border: 0.5px solid black;
+
+}
+
+.status{
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-family: cursive;
+    text-transform: uppercase;
+}
+/*Social design ends here*/
+
+.footerContainer{
+    width: 100%;
+    
+}
+.socialIcons{
+    display: flex;
+    justify-content: center;
+}
+.socialIcons a{
+    text-decoration: none;
+    padding: 5px;
+    background-color: white;
+    margin: 5px;
+    border-radius: 30%;
+}
+
+.socialIcons a i{
+    font-size: 2rem;
+    color: black;
+    opacity: 0.9;
+}
+
+.socialIcons a:hover{
+    color: white;
+    transition: 0.5s;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-aligns the content horizontally */
+    padding: 20px;
+    background-color: pink; /* Optional background color */
+    color: black;
+  }
+  
+  /* Contact section styling */
+  .footer-box {
+    text-align: center; /* Center-aligns text and icons */
+    margin-bottom: 20px; /* Space between Contact and copyright */
+  }
+  
+  .footer-box h3 {
+    margin-top: none;
+    margin-bottom: 5px; /* Space between heading and list */
+  }
+  
+  .footer-box ul {
+    list-style: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-box li {
+    margin: 0; /* Space between list items */
+  }
+  
+  /* Copyright section styling */
+  .footerBottom {
+    text-align: center; /* Center-aligns text */
+    margin-top: 15px; /* Space from Contact section */
+  }
+/*footer design ends here*/
+
+@media(max-width: 568px) {
+    .home h1{
+        font-size: 2.5rem;
+     }
+     .home-text p {
+         font-size: 0.8rem;
+     }
+     section {
+         padding: 50px 50px;
+     }
+ 
+     .heading h2 {
+         font-size: 15px;
+     }
+     .members .box {
+         width: 130px;
+     }
+     .members button {
+         padding: 5px 20px;
+         font-size: 12px;
+     }
+ 
+     .socialIcons a i {
+         font-size: 1.2rem;
+     }
+ 
+     .footer-box li {
+        font-size: 10px;
+     }
+ 
+     .footerBottom {
+         font-size: 10px;
+       }
+     .info-image img {
+         width: 120px;
+         height: 120px;
+     }
+ 
+     .info-image {
+         margin-bottom: 0;
+     }
+ 
+     .status {
+        font-size: 16px;
+        margin-bottom: 1rem;
+     }
+     .percent {
+         font-size: 16px;
+     }
+ 
+     .profile-item {
+         width: auto;
+     }
+ 
+     .profile-container .box {
+         width: 270px;
+     }
+ 
+     .box h2 {
+         font-size: 25px;
+         margin-bottom: 5px;
+     }
+ 
+     .others-image img {
+         width: 120px;
+         height: 120px;
+     }
+ 
+     .others-info h2 {
+         font-size: 20px;
+     }
+ 
+     .others-info p {
+         font-size: 13px;
+     }
+ 
+     .others-info {
+         margin-top: 1rem; 
+     }
+ 
+     .others-item {
+         margin-bottom: 2rem;
+     }
+ 
+     .popup-comment {
+         width: 300px;
+         height: 470px;
+     }
+     .top {
+         font-size: 20px;
+     }
+     
+     .popup-comment .form-comment h2 {
+     font-size: 25px;
+     }
+ 
+     .popup-urComment h1 {
+         font-size: 30px;
+     }
+ 
+     .popup-urComment h2 {
+         font-size: 25px;
+     }
+ 
+     .popup {
+         width: 350px;
+         height: 570px;
+     }
+
+}
+
+@media(max-width: 450px) {
+    .home {
+        min-height: 70vh;
+    }
+
+    .home h1{
+       font-size: 2.5rem;
+    }
+    .home-text p {
+        font-size: 0.8rem;
+    }
+    section {
+        padding: 50px 50px;
+    }
+
+    .heading h2 {
+        font-size: 15px;
+    }
+    .members .box {
+        width: 130px;
+    }
+    .members button {
+        padding: 5px 20px;
+        font-size: 12px;
+    }
+
+    .socialIcons a i {
+        font-size: 1.2rem;
+    }
+
+    .footer-box li {
+       font-size: 10px;
+    }
+
+    .footerBottom {
+        font-size: 10px;
+      }
+    .info-image img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .info-image {
+        margin-bottom: 0;
+    }
+
+    .status {
+       font-size: 16px;
+       margin-bottom: 1rem;
+    }
+    .percent {
+        font-size: 16px;
+    }
+
+    .profile-item {
+        width: auto;
+    }
+
+    .profile-container .box {
+        width: 270px;
+    }
+
+    .box h2 {
+        font-size: 25px;
+        margin-bottom: 5px;
+    }
+
+    .others-image img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .others-info h2 {
+        font-size: 20px;
+    }
+
+    .others-info p {
+        font-size: 13px;
+    }
+
+    .others-info {
+        margin-top: 1rem; 
+    }
+
+    .others-item {
+        margin-bottom: 2rem;
+    }
+
+    .popup-comment {
+        width: 300px;
+        height: 470px;
+    }
+    .top {
+        font-size: 20px;
+    }
+    
+    .popup-comment .form-comment h2 {
+    font-size: 25px;
+    }
+
+    .popup-urComment h1 {
+        font-size: 30px;
+    }
+
+    .popup-urComment h2 {
+        font-size: 25px;
+    }
+
+    .popup {
+        width: 350px;
+        height: 570px;
+    }
+}
+@media(max-width: 360px) {
+    .home {
+        min-height: 85vh;
+    }
+
+    .home h1{
+        font-size: 2rem;
+     }
+     header h3 {
+        font-size: 15px;
+    }
+     .home-text p {
+         font-size: 0.7rem;
+     }
+
+     .navbar {
+        width: 200px;
+     }
+
+     .navbar a {
+        font-size: 0.8rem;
+     }
+     section {
+         padding: 50px 20px;
+     }
+ 
+     .heading h2 {
+         font-size: 15px;
+     }
+     .members .box {
+         width: 130px;
+     }
+     .members button {
+         padding: 5px 20px;
+         font-size: 12px;
+     }
+ 
+     .socialIcons a i {
+         font-size: 1.2rem;
+     }
+ 
+     .footer-box li {
+        font-size: 10px;
+     }
+ 
+     .footerBottom {
+         font-size: 10px;
+       }
+     .info-image img {
+         width: 120px;
+         height: 120px;
+     }
+ 
+     .info-image {
+         margin-bottom: 0;
+     }
+ 
+     .status {
+        font-size: 16px;
+        margin-bottom: 1rem;
+     }
+     .percent {
+         font-size: 16px;
+     }
+ 
+     .profile-item {
+         width: auto;
+     }
+ 
+     .profile-container .box {
+         width: 270px;
+     }
+ 
+     .box h2 {
+         font-size: 25px;
+         margin-bottom: 5px;
+     }
+ 
+     .others-image img {
+         width: 120px;
+         height: 120px;
+     }
+ 
+     .others-info h2 {
+         font-size: 20px;
+     }
+ 
+     .others-info p {
+         font-size: 13px;
+     }
+ 
+     .others-info {
+         margin-top: 1rem; 
+     }
+ 
+     .others-item {
+         margin-bottom: 2rem;
+     }
+ 
+     .popup-comment {
+         width: 300px;
+         height: 470px;
+     }
+     .top {
+         font-size: 20px;
+     }
+     
+     .popup-comment .form-comment h2 {
+     font-size: 25px;
+     }
+ 
+     .popup-urComment h1 {
+         font-size: 30px;
+     }
+ 
+     .popup-urComment h2 {
+         font-size: 25px;
+     }
+ 
+     .popup {
+         width: 320px;
+         height: 550px;
+     }
+
+     .popup .form h1 {
+        font-size: 60px;
+    }
+    .popup .form h2 {
+        font-size: 20px;
+    }
+
+    .popup .form .form-element label {
+        font-size: 12px;
+    }
+ }
+
