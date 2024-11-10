@@ -1,118 +1,3 @@
-
-<?php 
-
-include('dbh.inc.php'); //To include our database connection
-
-?>  
-<?php
-//Our variable name for each member
-   $name1 = "Joanne Bosogon";
-   $name2 = "Monica Masangya";
-   $name3 = "Danielle Celecio";
-   $name4 = "Angel Cuevas";
-   $name5 = "Reymark Malabarbas";
-   $name6 = "John Karl Diaz";
-
-   $joanne_image2 = "images/Joanne2.jpg";
-   $monica_image2 = 'images/monica-img2.jpg';
-   $danielle_image2 = 'images/dani-img2.jpg';
-   $angel_image2 = 'images/angel1.jpg';
-   $reymark_image2 = 'images/marky-img2.png';
-   $karl_image2 = 'images/Karl2.jpg';
-
-//Our php  associative array that contains another associative array inside it.
-$profiles = [
-    [
-        'name' => $name1,   //Joanne
-        'age' => 20,
-        'birthday' => 'May 31, 2004',
-        'birthplace' => 'San Antonio Northern Samar',
-        'address' => 'Udings Coumpound Alabang, Muntinlupa City',
-        'pronouns' => 'She/Her',
-        'image' => $joanne_image2,
-        'favorites' => [
-            'images/hopya-removebg-preview.png',
-            'images/ice-cream1-removebg-preview.png',
-            'images/fries-removebg-preview.png'
-        ]
-    ],
-    [
-        'name' => $name2,    //Monica
-        'age' => 20,
-        'birthday' => 'December 7, 2003',
-        'birthplace' => 'Malvar, Batangas Province',
-        'address' => 'Tunasan, Muntinlupa',
-        'pronouns' => 'She/Her',
-        'image' => $monica_image2,
-        'favorites' => [
-            'images/chocolate-removebg-preview.png',
-            'images/chicken-removebg-preview.png',
-            'images/fries-removebg-preview.png'
-        ]
-    ],
-
-    [
-        'name' => $name3,   //Danielle
-        'age' => 21,
-        'birthday' => 'September 26, 2002',
-        'birthplace' => 'Muntinlupa City',
-        'address' => 'Poblacion, Muntinlupa City',
-        'pronouns' => 'She/Her',
-        'image' => $danielle_image2,
-        'favorites' => [
-            "images/ice-cream1-removebg-preview.png",
-            "images/milktea2-removebg-preview.png",
-            "images/coffee-removebg-preview.png"
-        ]
-    ],
-    
-    [
-        'name' => $name4,     //Angel
-        'age' => 20,
-        'birthday' => 'October 13, 2003',
-        'birthplace' => 'Malvar, Batangas Province',
-        'address' => 'Tunasan, Muntinlupa City',
-        'pronouns' => 'She/Her',
-        'image' => $angel_image2,
-        'favorites' => [
-            "images/pizza-removebg-preview.png",
-            "images/milktea2-removebg-preview.png",
-            "images/fries-removebg-preview.png"
-        ]
-    ],
-
-    [
-        'name' => $name5,    //Reymark
-        'age' => 21,
-        'birthday' => 'June 2, 2003',
-        'birthplace' => 'Almanza,Las Piñas City',
-        'address' => 'Almanza Dos, Las Piñas City',
-        'pronouns' => 'His/Him',
-        'image' => $reymark_image2,
-        'favorites' => [
-            "images/pizza-removebg-preview.png",
-            "images/chicken-removebg-preview.png",
-            "images/coffee-removebg-preview.png"
-        ]
-    ],
-
-    [
-        'name' => $name6,       //John Karl
-        'age' => 20,
-        'birthday' => 'April 25, 2002',
-        'birthplace' => 'Poblacion, Muntinlupa City',
-        'address' => 'Poblacion Muntinlupa, City',
-        'pronouns' => 'His/Him',
-        'image' => $karl_image2,
-        'favorites' => [
-            "images/adobo-removebg-preview.png",
-            "images/macaroni-removebg-preview.png",
-            "images/fruit_salad-removebg-preview.png"
-        ]
-    ],
-];
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,72 +18,12 @@ $profiles = [
 <header>
 
 
-<?php 
-$usernameError = "";
-$passwordError = "";
-$notifySuccess = "";
-$notifyError = "";
-
-//Validation for request method that is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check which form is submitted
-    if (isset($_POST['submit'])) { // Login Form
-    
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-
-        // Validate username
-        if (empty($username) || strlen($username) < 3) {
-            $usernameError = "Username must be at least 3 characters long.";
-        }
-
-        // Validate password
-        if (empty($password) || strlen($password) < 6) {
-            $passwordError = "Password must be at least 6 characters long.";
-        }
-
-    } elseif (isset($_POST['submitComment'])) { // Comment Form
-        
-        $name = trim($_POST['name']);
-        $message = trim($_POST['message']);
-
-        // Validate comment fields
-        if (empty($name) || strlen($name) < 2) {
-            $notifyError = "Name must be at least 2 characters long.";
-        } elseif (empty($message)) {
-            $notifyError = "Message cannot be empty.";
-        } else {
-            // Prepare our SQL statement to insert in our connected database
-            $stmt = $conn->prepare("INSERT INTO comments (author, message) VALUES (?, ?)");
-            $stmt->bind_param("ss", $name, $message);
-
-            // Execute the statement
-            if ($stmt->execute()) {
-                $notifySuccess = "Comment added successfully.";
-            } else {
-                $notifyError = "Failed to add comment.";
-            }
-            $stmt->close();
-        }
-    }
-}
-?>
 
 <a href="#" class="title">
-    <h3>
-    <?php
-    // Only display the username if it the login form was submitted without errors
-    if (isset($_POST["username"]) && !empty($_POST["username"]) && empty($usernameError) && $_POST["password"] && strlen($password) > 6) {
-        echo htmlspecialchars($_POST["username"]); 
-    } else {
-        echo "personal.Details"; 
-    }
-    ?>
-    </h3>
+    <h3>Personal.Details</h3>
 </a>
 
 
-    
     <ul class="navbar">
         <li><a href="#home">Home</a></li>
         <li><a href="#members">Members</a></li>
@@ -216,77 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </header>
 
 
-
-<!-- HTML part of the file -->
-<div class="popup" id="login-popup">
-    <div class="close-btn">&times;</div>
-    <div class="form">
-        <h1>💗</h1>
-        <h2>Hello, Friend!</h2>
-        <p>Are you ready to know more about us? We can't wait also to know you. Please enter your name and let's get the party started.</p>
-        
-        <!-- Form starts here/POST METHOD-->
-        <form action="ideaProfile.php" method="POST">
-            <div class="form-element">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter username" required>
-                <span class="error"> <?php echo $usernameError;?></span>
-            </div>
-            <div class="form-element">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter password" required>
-                <span class="error"> <?php echo $passwordError;?></span>
-            </div>
-            <div class="form-element">
-                <button type="submit" name="submit">Sign in</button>
-            </div>
-            <div class="form-element">
-                <input type="checkbox" id="remember-me">
-                <label for="remember-me">Remember me</label>
-            </div>
-            <small>Don't have an account yet?<a href="profileSignUp.php">Create Account</a></small>
-        </form>
-        <!-- Form ends here -->
-        <h2>˖⁺‧₊˚♡˚₊‧⁺˖♡︎˖⁺‧₊˚♡˚₊‧⁺˖</h2>
-    </div>
-</div>
-
-
-
-
-
-
-
-    <!--Our GET method-->
-    <!--Comment structure starts here-->
-<div class="popup-comment">
-        <div class="close-button">&times;</div>
-        <div class="form-comment">
-            <h1 class="top">⎛⎝ ≽ > ⩊ < ≼ ⎠⎞</h1>
-            <h2>Describe Us</h2>
-
-    <form action="ideaProfile.php" method="POST">
-        <div class="form-element-comment">
-            <label for="name">Author</label>
-            <input type="text" id="name" name="name" placeholder="Enter name" required>
-        </div>
-        <div class="form-element-comment">
-            <label for="text">Comment</label>
-            <textarea id="text" name="message" placeholder="Share your insight with us"></textarea>
-            </div>
-        <div class="form-element-comment">
-            <button type="submit" name="submitComment">Post</button>
-        </div>
-        <small>See comments?<a href="urComment.php">Go to comments</a></small>
-        <div class="notif" style="color:red; display:flex; justify-content:center; align-items:center; font-size:13px; margin-top:12px;">
-        <p><?php echo $notifySuccess; ?></p>
-        <p><?php echo $notifyError; ?></p>
-        </div>
-
-      
-    </form>
-        </div>
-</div>
 
 
     
@@ -771,7 +525,141 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Footer is not displayed on this page.";
     }
     ?>
-    <script src="ideaProfile.js"></script>
+    <script>
+       //For navbar responsive
+// Initialization
+const hamburger = document.querySelector('.hamburger');  //Initialization for hamburger
+const navbar = document.querySelector('.navbar');        //Initialization for navbar
+
+const showContainer1 = document.getElementById('show-container1');
+const joanne = document.getElementById('joanne');
+const showContainer2 = document.getElementById('show-container2');
+const monica = document.getElementById('monica');
+const showContainer3 = document.getElementById('show-container3');
+const danielle = document.getElementById('danielle');
+const showContainer4 = document.getElementById('show-container4');
+const angel = document.getElementById('angel');
+const showContainer5 = document.getElementById('show-container5');
+const reymark = document.getElementById('reymark');
+const showContainer6 = document.getElementById('show-container6');
+const karl = document.getElementById('karl');
+
+
+hamburger.addEventListener('click', () => {             //Once the hamburder is click the navbar wil open and it will display as X
+    navbar.classList.toggle('nav--open');              
+    hamburger.classList.toggle('hamburger--open');
+});
+
+
+//Ito yung to show the others section
+const showOthersLink = document.getElementById('show-others');
+const othersSection = document.querySelector('.others');
+const showProfileLink = document.getElementById('show-profile');
+const profileSection = document.querySelector('.profile');  //once the profile is click profile will be seen
+
+//Once others in navbar is click, others will be visible and the other navbar section will be invisible
+showOthersLink.addEventListener('click', (e) => {          
+    othersSection.classList.toggle('others--visible');
+    profileSection.classList.remove('profile--visible');
+    joanne.classList.remove('container-details--open');
+    joanne.classList.remove('container-details--open');
+    monica.classList.remove('container-details--open');
+    danielle.classList.remove('container-details--open');
+    angel.classList.remove('container-details--open');
+    reymark.classList.remove('container-details--open');
+    karl.classList.remove('container-details--open');
+});
+
+//This is naman to show the profile information
+showProfileLink.addEventListener('click', (e) => {
+    profileSection.classList.toggle('profile--visible');
+    othersSection.classList.remove("others--visible"); //Once the button is link this will be remove
+    joanne.classList.remove('container-details--open');
+    joanne.classList.remove('container-details--open');
+    monica.classList.remove('container-details--open');
+    danielle.classList.remove('container-details--open');
+    angel.classList.remove('container-details--open');
+    reymark.classList.remove('container-details--open');
+    karl.classList.remove('container-details--open');
+});
+
+
+//Show joanne's web development knowledge
+showContainer1.addEventListener('click', () => {
+    profileSection.classList.remove('profile--visible');
+    joanne.classList.toggle('container-details--open'); // Toggle the visibility of Joanne's details
+    othersSection.classList.remove("others--visible"); //Once the button is click this will be remove the others(so if open to and you click the button wala ng mag overflow)
+    monica.classList.remove('container-details--open');
+    danielle.classList.remove('container-details--open');
+    angel.classList.remove('container-details--open');
+    reymark.classList.remove('container-details--open');
+    karl.classList.remove('container-details--open');
+});
+
+//Show Monica web development knowledge
+showContainer2.addEventListener('click', () => {
+    monica.classList.toggle('container-details--open');
+    profileSection.classList.remove('profile--visible');
+    othersSection.classList.remove("others--visible");
+    joanne.classList.remove('container-details--open');
+    danielle.classList.remove('container-details--open');
+    angel.classList.remove('container-details--open');
+    reymark.classList.remove('container-details--open');
+    karl.classList.remove('container-details--open');
+});
+
+//danielle
+showContainer3.addEventListener('click', () => {
+    profileSection.classList.remove('profile--visible');
+    othersSection.classList.remove("others--visible");
+    danielle.classList.toggle('container-details--open');
+    joanne.classList.remove('container-details--open');
+    monica.classList.remove('container-details--open');
+    angel.classList.remove('container-details--open');
+    reymark.classList.remove('container-details--open');
+    karl.classList.remove('container-details--open');
+});
+
+//angel
+showContainer4.addEventListener('click', () => {
+profileSection.classList.remove('profile--visible');
+othersSection.classList.remove("others--visible");
+angel.classList.toggle('container-details--open');
+danielle.classList.remove('container-details--open');
+joanne.classList.remove('container-details--open');
+monica.classList.remove('container-details--open');
+reymark.classList.remove('container-details--open');
+karl.classList.remove('container-details--open');
+});
+
+//reymark
+showContainer5.addEventListener('click', () => {
+profileSection.classList.remove('profile--visible');
+othersSection.classList.remove("others--visible");
+reymark.classList.toggle('container-details--open');
+danielle.classList.remove('container-details--open');
+joanne.classList.remove('container-details--open');
+monica.classList.remove('container-details--open');
+angel.classList.remove('container-details--open');
+karl.classList.remove('container-details--open');
+});
+
+//karl
+showContainer6.addEventListener('click', () => {
+profileSection.classList.remove('profile--visible');
+othersSection.classList.remove("others--visible");
+karl.classList.toggle('container-details--open');
+danielle.classList.remove('container-details--open');
+joanne.classList.remove('container-details--open');
+monica.classList.remove('container-details--open');
+angel.classList.remove('container-details--open');
+reymark.classList.remove('container-details--open');
+});
+
+
+//showing the login popup
+
+    </script>
     
 </body>
 </html>
